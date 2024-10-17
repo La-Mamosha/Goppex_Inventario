@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Ocultar Producto</h2>
+<p>¿Estás seguro que deseas ocultar el producto "{{ producto.nombre }}"?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, ocultar producto</button>
+    <a href="{% url 'inventario' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

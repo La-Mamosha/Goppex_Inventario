@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4 text-center">
+    <h2 class="text-danger">
+        <i class="fas fa-eye-slash"></i> Confirmar Ocultación de Categoría
+    </h2>
+
+    <p>¿Estás seguro de que deseas ocultar la categoría <strong>"{{ categoria.nombre }}"</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">
+            <i class="fas fa-check-circle"></i> Ocultar
+        </button>
+        <a href="{% url 'categorias' %}" class="btn btn-secondary">
+            <i class="fas fa-times-circle"></i> Cancelar
+        </a>
+    </form>
+</div>
+{% endblock %}

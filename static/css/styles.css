@@ -1,0 +1,71 @@
+/* Estilos base del sitio */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    background-color: #00a86b; /* Verde oscuro */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Menú lateral (Sidebar) */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #000000; /* Negro */
+    padding-top: 20px;
+    color: white;
+    box-shadow: 4px 0px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.sidebar a {
+    padding: 15px 20px;
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #00a86b;
+    color: white;
+}
+
+.sidebar img {
+    max-width: 100%;  
+    height: auto;     /* Mantiene la proporción de la imagen */
+    width: 100px;     /* Establece un ancho específico */
+    margin: 0 auto;   /* Centra la imagen */
+    display: block;  
+    border-radius: 50%;  /* la imagen redonda */
+    border: 2px solid #fff; /* agrega un borde blanco alrededor */
+}
+
+
+
+
+/* Pie de página */
+.footer {
+    background-color: #000000;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px -2px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}

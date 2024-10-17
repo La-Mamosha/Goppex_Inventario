@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Agregar Venta</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="cliente">Cliente</label>
+        <select class="form-control" id="cliente" name="cliente">
+            {% for cliente in clientes %}
+            <option value="{{ cliente.id }}">{{ cliente.razon_social }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="producto">Producto</label>
+        <select class="form-control" id="producto" name="producto">
+            {% for producto in productos %}
+            <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="cantidad_producto">Cantidad</label>
+        <input type="number" class="form-control" id="cantidad_producto" name="cantidad_producto" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar Venta</button>
+</form>
+{% endblock %}

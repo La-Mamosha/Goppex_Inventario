@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Listado de Ventas</h2>
+<a href="{% url 'agregar_venta' %}" class="btn btn-primary mb-3">Agregar Venta</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>IVA</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for venta in ventas %}
+        <tr>
+            <td>{{ venta.id }}</td>
+            <td>{{ venta.cliente.razon_social }}</td>
+            <td>{{ venta.producto.nombre }}</td>
+            <td>{{ venta.cantidad_producto }}</td>
+            <td>{{ venta.sub_total }}</td>
+            <td>{{ venta.iva }}</td>
+            <td>{{ venta.total }}</td>
+            <td>
+                <a href="{% url 'eliminar_venta' venta.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

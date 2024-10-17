@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4 text-success">
+        <i class="fas fa-box"></i> Inventario
+    </h2>
+
+    <div class="mb-4 text-center">
+        <a href="{% url 'agregar_producto' %}" class="btn btn-success me-2">Agregar Producto</a>
+        <a href="{% url 'exportar_csv' %}" class="btn btn-secondary me-2">
+            <i class="fas fa-file-csv"></i> Exportar CSV
+        </a>
+        <a href="{% url 'exportar_pdf' %}" class="btn btn-secondary me-2">
+            <i class="fas fa-file-pdf"></i> Exportar PDF
+        </a>
+        <a href="{% url 'productos_ocultos' %}" class="btn btn-warning">Ver productos ocultos</a>
+    </div>
+
+    <form method="GET" action="{% url 'inventario' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" placeholder="Buscar productos..." class="form-control" aria-label="Buscar productos...">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr class="text-center">
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>${{ producto.precio_unitario }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>
+                    <a href="{% url 'editar_producto' producto.id %}" class="btn btn-success">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'ocultar_producto' producto.id %}" class="btn btn-secondary">
+                        <i class="fas fa-eye-slash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

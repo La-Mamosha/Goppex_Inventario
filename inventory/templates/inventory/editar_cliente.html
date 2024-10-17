@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Título mejorado con estilo e ícono -->
+    <h2 class="text-center mb-4">
+        <i class="fas fa-edit"></i> Editar Cliente
+    </h2>
+
+    <!-- Formulario con diseño mejorado -->
+    <form method="POST" class="shadow p-4 rounded bg-light">
+        {% csrf_token %}
+
+        <!-- Campo de RUT -->
+        <div class="form-group">
+            <label for="rut" class="font-weight-bold">RUT</label>
+            <input type="text" class="form-control" id="rut" name="rut" value="{{ cliente.rut }}" required>
+        </div>
+
+        <!-- Campo de Razón Social -->
+        <div class="form-group">
+            <label for="razon_social" class="font-weight-bold">Razón Social</label>
+            <input type="text" class="form-control" id="razon_social" name="razon_social" value="{{ cliente.razon_social }}" required>
+        </div>
+
+        <!-- Campo de Giro -->
+        <div class="form-group">
+            <label for="giro" class="font-weight-bold">Giro</label>
+            <input type="text" class="form-control" id="giro" name="giro" value="{{ cliente.giro }}" required>
+        </div>
+
+        <!-- Campo de Dirección -->
+        <div class="form-group">
+            <label for="direccion" class="font-weight-bold">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="{{ cliente.direccion }}" required>
+        </div>
+
+        <!-- Campo de Correo Electrónico -->
+        <div class="form-group">
+            <label for="correo" class="font-weight-bold">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" value="{{ cliente.correo }}" required>
+        </div>
+
+        <!-- Campo de Teléfono -->
+        <div class="form-group">
+            <label for="telefono" class="font-weight-bold">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" value="{{ cliente.telefono }}" required>
+        </div>
+
+        <!-- Botón de envío con estilo mejorado -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-sync-alt"></i> Actualizar Cliente
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

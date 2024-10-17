@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Listado de Guías de Despacho</h2>
+<a href="{% url 'agregar_guia_despacho' %}" class="btn btn-primary mb-3">Agregar Guía de Despacho</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Dirección</th>
+            <th>Fecha de Emisión</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for guia in guias %}
+        <tr>
+            <td>{{ guia.id }}</td>
+            <td>{{ guia.venta.cliente.razon_social }}</td>
+            <td>{{ guia.direccion }}</td>
+            <td>{{ guia.fecha_emision }}</td>
+            <td>
+                <a href="{% url 'eliminar_guia_despacho' guia.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

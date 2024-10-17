@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Título mejorado con estilo e ícono -->
+    <h2 class="text-center mb-4">
+        <i class="fas fa-user-plus"></i> Agregar Cliente
+    </h2>
+
+    <!-- Mostrar mensaje de error si existe -->
+    {% if error_message %}
+        <div class="alert alert-danger text-center">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    <!-- Formulario con diseño mejorado -->
+    <form method="POST" class="shadow p-4 rounded bg-light">
+        {% csrf_token %}
+
+        <!-- Campo de RUT -->
+        <div class="form-group">
+            <label for="rut" class="font-weight-bold">RUT</label>
+            <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingresa el RUT" required>
+        </div>
+
+        <!-- Campo de Razón Social -->
+        <div class="form-group">
+            <label for="razon_social" class="font-weight-bold">Razón Social</label>
+            <input type="text" class="form-control" id="razon_social" name="razon_social" placeholder="Ingresa la razón social" required>
+        </div>
+
+        <!-- Campo de Giro -->
+        <div class="form-group">
+            <label for="giro" class="font-weight-bold">Giro</label>
+            <input type="text" class="form-control" id="giro" name="giro" placeholder="Ingresa el giro" required>
+        </div>
+
+        <!-- Campo de Dirección -->
+        <div class="form-group">
+            <label for="direccion" class="font-weight-bold">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingresa la dirección" required>
+        </div>
+
+        <!-- Campo de Correo Electrónico -->
+        <div class="form-group">
+            <label for="correo" class="font-weight-bold">Correo Electrónico</label>
+            <input type="email" class="form-control" id="correo" name="correo" placeholder="Ingresa el correo electrónico" required>
+        </div>
+
+        <!-- Campo de Teléfono -->
+        <div class="form-group">
+            <label for="telefono" class="font-weight-bold">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingresa el teléfono" required>
+        </div>
+
+        <!-- Botón de envío con estilo mejorado -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-plus-circle"></i> Agregar Cliente
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

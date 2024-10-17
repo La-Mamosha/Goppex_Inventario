@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Título mejorado con ícono -->
+    <h2 class="text-center mb-4 text-warning">
+        <i class="fas fa-box-open"></i> Productos Ocultos
+    </h2>
+
+    <!-- Tabla con formato mejorado -->
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Categoría</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr class="text-center">
+                <td>{{ producto.codigo }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>${{ producto.precio_unitario }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>
+                    <!-- Botón de activar con ícono -->
+                    <form method="POST" action="{% url 'activar_producto' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check-circle"></i> Activar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'inventario' %}" class="btn btn-secondary">Volver a Inventario</a>
+</div>
+{% endblock %}

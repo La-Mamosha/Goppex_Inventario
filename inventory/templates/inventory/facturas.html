@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Listado de Facturas</h2>
+<a href="{% url 'agregar_factura' %}" class="btn btn-primary mb-3">Agregar Factura</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Monto Total</th>
+            <th>Estado de Pago</th>
+            <th>Fecha de Emisión</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for factura in facturas %}
+        <tr>
+            <td>{{ factura.id }}</td>
+            <td>{{ factura.venta.cliente.razon_social }}</td>
+            <td>{{ factura.monto_total }}</td>
+            <td>{{ factura.estado_pago }}</td>
+            <td>{{ factura.fecha_emision }}</td>
+            <td>
+                <a href="{% url 'eliminar_factura' factura.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

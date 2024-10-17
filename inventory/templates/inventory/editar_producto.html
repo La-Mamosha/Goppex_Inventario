@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Título mejorado con estilo e ícono -->
+    <h2 class="text-center mb-4">
+        <i class="fas fa-edit"></i> Editar Producto
+    </h2>
+
+    <!-- Formulario con diseño mejorado -->
+    <form method="POST" class="shadow p-4 rounded bg-light">
+        {% csrf_token %}
+
+        <!-- Campo de código -->
+        <div class="form-group">
+            <label for="codigo" class="font-weight-bold">Código del Producto</label>
+            <input type="text" class="form-control" id="codigo" name="codigo" value="{{ producto.codigo }}" required>
+        </div>
+
+        <!-- Campo de nombre -->
+        <div class="form-group">
+            <label for="nombre" class="font-weight-bold">Nombre del Producto</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ producto.nombre }}" required>
+        </div>
+
+        <!-- Campo de descripción -->
+        <div class="form-group">
+            <label for="descripcion" class="font-weight-bold">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required>{{ producto.descripcion }}</textarea>
+        </div>
+
+        <!-- Campo de precio -->
+        <div class="form-group">
+            <label for="precio_unitario" class="font-weight-bold">Precio Unitario</label>
+            <input type="number" class="form-control" id="precio_unitario" name="precio_unitario" value="{{ producto.precio_unitario }}" min="0" step="0.01" required>
+        </div>
+
+        <!-- Campo de fecha de vencimiento -->
+        <div class="form-group">
+            <label for="fecha_vencimiento" class="font-weight-bold">Fecha de Vencimiento</label>
+            <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento" value="{{ producto.fecha_vencimiento }}" required>
+        </div>
+
+        <!-- Campo de categoría -->
+        <div class="form-group">
+            <label for="categoria" class="font-weight-bold">Categoría</label>
+            <select class="form-control" id="categoria" name="categoria" required>
+                {% for categoria in categorias %}
+                <option value="{{ categoria.id }}" {% if producto.categoria.id == categoria.id %}selected{% endif %}>{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Campo de cantidad -->
+        <div class="form-group">
+            <label for="cantidad" class="font-weight-bold">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ producto.cantidad }}" min="1" required>
+        </div>
+
+        <!-- Botón de envío con estilo mejorado -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-success btn-lg">
+                <i class="fas fa-sync-alt"></i> Actualizar Producto
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

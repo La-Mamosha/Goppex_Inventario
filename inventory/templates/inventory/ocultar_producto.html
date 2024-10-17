@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4 text-center">
+    <!-- Título mejorado -->
+    <h2 class="text-center mb-4 text-danger">
+        <i class="fas fa-eye-slash"></i> Ocultar Producto
+    </h2>
+
+    <!-- Mensaje de confirmación -->
+    <p class="lead">¿Estás seguro que deseas ocultar el producto <strong>"{{ producto.nombre }}"</strong>?</p>
+
+    <!-- Formulario con los botones -->
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success btn-lg mx-2">
+            <i class="fas fa-check-circle"></i> Ocultar
+        </button>
+        <a href="{% url 'inventario' %}" class="btn btn-secondary btn-lg mx-2">
+            <i class="fas fa-times-circle"></i> Cancelar
+        </a>
+    </form>
+</div>
+{% endblock %}

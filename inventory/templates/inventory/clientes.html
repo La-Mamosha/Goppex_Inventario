@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4 text-success">
+        <i class="fas fa-users"></i> Clientes
+    </h2>
+
+    <div class="mb-4 text-center">
+        <a href="{% url 'agregar_cliente' %}" class="btn btn-success me-2">Agregar Cliente</a>
+        <a href="{% url 'exportar_csv_clientes' %}" class="btn btn-secondary me-2">
+            <i class="fas fa-file-csv"></i> Exportar CSV
+        </a>
+        <a href="{% url 'exportar_pdf_clientes' %}" class="btn btn-secondary me-2">
+            <i class="fas fa-file-pdf"></i> Exportar PDF
+        </a>
+        <a href="{% url 'ver_clientes_ocultos' %}" class="btn btn-warning">Ver clientes ocultos</a>
+    </div>
+
+    <form method="GET" action="{% url 'clientes' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" id="search" class="form-control" placeholder="Buscar cliente...">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>RUT</th>
+                <th>Razón Social</th>
+                <th>Giro</th>
+                <th>Dirección</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr class="text-center">
+                <td>{{ cliente.rut }}</td>
+                <td>{{ cliente.razon_social }}</td>
+                <td>{{ cliente.giro }}</td>
+                <td>{{ cliente.direccion }}</td>
+                <td>{{ cliente.correo }}</td>
+                <td>{{ cliente.telefono }}</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <!-- Botón de Editar -->
+                            <a href="{% url 'editar_cliente' cliente.id %}" class="btn btn-success btn-sm me-2">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        
+                        <!-- Botón de Ocultar -->
+                        <form method="POST" action="{% url 'ocultar_cliente' cliente.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary btn-sm" style="margin-left: 10px;">
+                                <i class="fas fa-eye-slash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Función de búsqueda
+    document.getElementById('search').addEventListener('keyup', function() {
+        var value = this.value.toLowerCase().trim();
+        var rows = document.querySelectorAll('table tbody tr');
+
+        rows.forEach(function(row) {
+            var text = row.textContent.toLowerCase();
+            if (text.includes(value)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+{% endblock %}

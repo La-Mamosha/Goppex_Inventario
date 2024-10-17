@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4 text-success">
+        <i class="fas fa-tags"></i> Categorías de Productos
+    </h2>
+
+    <div class="mb-4 text-center">
+        <a href="{% url 'agregar_categoria' %}" class="btn btn-success me-2">
+            <i class="fas fa-plus-circle"></i> Agregar Categoría
+        </a>
+        <a href="{% url 'categorias_ocultas' %}" class="btn btn-warning">
+            <i class="fas fa-eye-slash"></i> Ver Categorías Ocultas
+        </a>
+    </div>
+
+    <form method="GET" action="{% url 'categorias' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" placeholder="Buscar categorías..." class="form-control" aria-label="Buscar categorías...">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+            <tr class="text-center">
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nombre }}</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <!-- Botón de Editar -->
+                        <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-success btn-sm me-2">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <div style="width: 20px;"></div> <!-- Espacio vacío -->
+                        
+                        <!-- Botón de Ocultar -->
+                        <form method="POST" action="{% url 'ocultar_categoria' categoria.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-eye-slash"></i> Ocultar
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

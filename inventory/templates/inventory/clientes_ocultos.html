@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Título mejorado con ícono -->
+    <h2 class="text-center mb-4 text-warning">
+        <i class="fas fa-user-slash"></i> Clientes Ocultos
+    </h2>
+
+    <!-- Tabla con formato mejorado -->
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <th>RUT</th>
+                <th>Razón Social</th>
+                <th>Giro</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr class="text-center">
+                <td>{{ cliente.rut }}</td>
+                <td>{{ cliente.razon_social }}</td>
+                <td>{{ cliente.giro }}</td>
+                <td>
+                    <!-- Botón de activar con ícono -->
+                    <form method="POST" action="{% url 'activar_cliente' cliente.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check-circle"></i> Activar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'clientes' %}" class="btn btn-secondary">Volver a Clientes</a>
+</div>
+{% endblock %}

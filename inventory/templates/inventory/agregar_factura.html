@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Agregar Factura</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="venta">Venta</label>
+        <select class="form-control" id="venta" name="venta">
+            {% for venta in ventas %}
+            <option value="{{ venta.id }}">{{ venta.cliente.razon_social }} - {{ venta.total }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="estado_pago">Estado de Pago</label>
+        <select class="form-control" id="estado_pago" name="estado_pago">
+            <option value="Pagado">Pagado</option>
+            <option value="Pendiente">Pendiente</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar Factura</button>
+</form>
+{% endblock %}
